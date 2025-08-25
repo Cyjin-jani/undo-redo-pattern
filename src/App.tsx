@@ -1,50 +1,54 @@
-import { useState } from 'react';
-import { Header } from './components/Header';
-import { TodoList } from './components/TodoList';
-import type { Todo } from './types';
+import StateSnapshot from './phase1_StateSnapshot/StateSnapshot';
+import HistoryStack from './phase2_HistoryStack/HistoryActionStack';
+import PragmaticCommand from './phase3_PragmaticCommand/PragmaticCommand';
+import ClassicCommand from './phase4_ClassicCommand/ClassicCommand';
 
 function App() {
-  const [todos, setTodos] = useState<Todo[]>([]);
-
-  // Placeholder functions
-  const handleAddTodo = (text: string) => {
-    console.log('Add:', text);
-    // Logic will be implemented in each version branch
-  };
-  const handleDeleteTodo = (id: string) => {
-    console.log('Delete:', id);
-  };
-  const handleToggleTodo = (id: string) => {
-    console.log('Toggle:', id);
-  };
-  const handleUpdateTodo = (id: string, text: string) => {
-    console.log('Update:', id, text);
-  };
-  const handleUndo = () => {
-    console.log('Undo');
-  };
-  const handleRedo = () => {
-    console.log('Redo');
-  };
-
-  return (
-    <div className="flex flex-col items-center min-h-screen text-white bg-gray-900">
-      <Header
-        version="UI-Only"
-        onUndo={handleUndo}
-        onRedo={handleRedo}
-        canUndo={false}
-        canRedo={false}
-      />
-      <main className="flex justify-center p-4 w-full">
-        <TodoList
-          todos={todos}
-          onAdd={handleAddTodo}
-          onDelete={handleDeleteTodo}
-          onToggle={handleToggleTodo}
-          onUpdate={handleUpdateTodo}
-        />
-      </main>
+    return (
+    <div className="min-h-screen bg-gray-50">
+      <div className="px-4 py-8 mx-auto" style={{ maxWidth: '900px' }}>
+        <header className="mb-12 text-center">
+          <h1 className="mb-4 text-4xl font-bold text-gray-800 md:text-5xl">
+            TODO App - Undo/Redo Test
+          </h1>
+        </header>
+        
+        <section className="mb-16">
+          <div className="mb-8 text-center">
+            <h2 className="mb-2 text-2xl font-semibold text-gray-800">
+              Phase 1: 상태 스냅샷 패턴
+            </h2>
+          </div>
+          <StateSnapshot />
+        </section>
+        
+        <section className="mb-16">
+          <div className="mb-8 text-center">
+            <h2 className="mb-2 text-2xl font-semibold text-gray-800">
+              Phase 2: 히스토리 스택 패턴
+            </h2>
+          </div>
+          <HistoryStack />
+        </section>
+        
+        <section className="mb-16">
+          <div className="mb-8 text-center">
+            <h2 className="mb-2 text-2xl font-semibold text-gray-800">
+              Phase 3: 데이터 기반 커맨드 패턴
+            </h2>
+          </div>
+          <PragmaticCommand />
+        </section>
+        
+        <section className="mb-16">
+          <div className="mb-8 text-center">
+            <h2 className="mb-2 text-2xl font-semibold text-gray-800">
+              Phase 4: 클래식 커맨드 패턴
+            </h2>
+          </div>
+          <ClassicCommand />
+        </section>
+      </div>
     </div>
   );
 }
